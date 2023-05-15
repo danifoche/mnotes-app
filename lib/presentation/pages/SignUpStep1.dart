@@ -29,8 +29,6 @@ class _SignUpStep1State extends State<SignUpStep1> {
             child: SingleChildScrollView(
               child: SafeArea(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       //? title
                       Text(
