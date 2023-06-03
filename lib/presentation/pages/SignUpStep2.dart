@@ -85,8 +85,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
                                     color: Colors.black.withOpacity(0.16),
                                     spreadRadius: 0.4,
                                     blurRadius: 8,
-                                    offset: const Offset(
-                                        0, 4), // changes position of shadow
+                                    offset: const Offset(0, 4),
                                   ),
                                 ],
                               ),
@@ -132,8 +131,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
                                     color: Colors.black.withOpacity(0.16),
                                     spreadRadius: 0.4,
                                     blurRadius: 8,
-                                    offset: const Offset(
-                                        0, 4), // changes position of shadow
+                                    offset: const Offset(0, 4),
                                   ),
                                 ],
                               ),
@@ -178,8 +176,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
                                     color: Colors.black.withOpacity(0.16),
                                     spreadRadius: 0.4,
                                     blurRadius: 8,
-                                    offset: const Offset(
-                                        0, 4), // changes position of shadow
+                                    offset: const Offset(0, 4),
                                   ),
                                 ],
                               ),
@@ -224,8 +221,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
                                     color: Colors.black.withOpacity(0.16),
                                     spreadRadius: 0.4,
                                     blurRadius: 8,
-                                    offset: const Offset(
-                                        0, 4), // changes position of shadow
+                                    offset: const Offset(0, 4),
                                   ),
                                 ],
                               ),
