@@ -27,7 +27,9 @@ class _SignUpStep2State extends State<SignUpStep2> {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         leading: IconButton(
-          onPressed: () => print("back"),
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: SimpleShadow(
             opacity: 0.4,
             color: Colors.black,
@@ -35,7 +37,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
             sigma: 5,
             child: SvgPicture.asset(
               "images/back_icon.svg",
-              semanticsLabel: "Apple Logo",
+              semanticsLabel: "Back button",
               width: 32,
               height: 32,
               fit: BoxFit.cover,

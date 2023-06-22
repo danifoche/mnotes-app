@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mnotes/settings/app_settings.dart';
+import 'package:mnotes/settings/app_utils.dart';
 
 class SignUpStep1 extends StatefulWidget {
   const SignUpStep1({super.key});
@@ -9,6 +11,13 @@ class SignUpStep1 extends StatefulWidget {
 }
 
 class _SignUpStep1State extends State<SignUpStep1> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  final Map<String, String> _validatorFields = {
+    "nameField": "nome",
+    "lastnameField": "cognome"
+  };
 
   //? dismiss the keyboard when tapped outside it
   void dismissKeyboard() {
@@ -58,6 +67,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
                           right: 18.0,
                         ),
                         child: Form(
+                          key: _formKey,
                           child: Column(
                             children: [
                               Padding(
@@ -65,44 +75,30 @@ class _SignUpStep1State extends State<SignUpStep1> {
                                   top: 5.0,
                                   bottom: 13.0,
                                 ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.16),
-                                        spreadRadius: 0.4,
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 4),
-                                      ),
-                                    ],
-                                  ),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                        hintText: "Nome",
-                                        hintStyle: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .hintStyle,
-                                        filled: true,
-                                        fillColor: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .fillColor,
-                                        contentPadding: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .contentPadding,
-                                        border: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .border,
-                                        focusedBorder: Theme.of(context)
-                                            .inputDecorationTheme
-                                            .focusedBorder),
-                                    style: Theme.of(context).textTheme.labelLarge,
-                                    cursorColor: Theme.of(context)
-                                        .textSelectionTheme
-                                        .cursorColor,
-                                  ),
+                                child: TextFormField(
+                                  validator: (value) => validateField(value, _validatorFields["nameField"]),
+                                  decoration: InputDecoration(
+                                      hintText: "Nome",
+                                      hintStyle: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .hintStyle,
+                                      filled: true,
+                                      fillColor: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .fillColor,
+                                      contentPadding: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .contentPadding,
+                                      border: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .border,
+                                      focusedBorder: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .focusedBorder),
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                  cursorColor: Theme.of(context)
+                                      .textSelectionTheme
+                                      .cursorColor,
                                 ),
                               ),
                                         
@@ -126,6 +122,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
                                     ],
                                   ),
                                   child: TextFormField(
+                                    validator: (value) => validateField(value, _validatorFields["lastnameField"]),
                                     decoration: InputDecoration(
                                       hintText: "Cognome",
                                       hintStyle: Theme.of(context)
@@ -184,7 +181,16 @@ class _SignUpStep1State extends State<SignUpStep1> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        print("tmp");
+                                        
+                                        //? validate the form
+                                        if(_formKey.currentState!.validate()) {
+                                          _formKey.currentState!.save();
+
+                                          Navigator.of(context).pushNamed(
+                                            appRoutes["signup_2"] ?? ""
+                                          );
+                                        }
+
                                       },
                                       child: Text(
                                         "Continua",
@@ -397,7 +403,12 @@ class _SignUpStep1State extends State<SignUpStep1> {
                                   top: 35.0,
                                 ),
                                 child: TextButton(
-                                  onPressed: null,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamedAndRemoveUntil(
+                                      appRoutes["login"] ?? "",
+                                      (route) => false
+                                    );
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mnotes/settings/app_settings.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -391,7 +392,12 @@ class _LoginState extends State<Login> {
                                   top: 35.0,
                                 ),
                                 child: TextButton(
-                                  onPressed: null,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamedAndRemoveUntil(
+                                      appRoutes["signup_1"] ?? "",
+                                      (route) => false
+                                    );
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
