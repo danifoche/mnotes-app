@@ -8,6 +8,11 @@ ThemeData appTheme = ThemeData(
         fontWeight: FontWeight.bold, 
         color: Colors.white,
     ),
+    titleMedium: TextStyle(
+        fontSize: 20, 
+        fontWeight: FontWeight.bold, 
+        color: Colors.white,
+    ),
     labelLarge: TextStyle(
         fontSize: 16, 
         fontWeight: FontWeight.bold, 
@@ -17,7 +22,12 @@ ThemeData appTheme = ThemeData(
       fontSize: 14,
       fontWeight: FontWeight.w200, 
       color: Colors.white,
-    )
+    ),
+    labelSmall: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.normal, 
+      color: Colors.black,
+    ),
   ),
   fontFamily: "Oxygen",
   inputDecorationTheme: const InputDecorationTheme(

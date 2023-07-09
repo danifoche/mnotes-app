@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mnotes/presentation/widgets/snackbar/custom_snackbar.dart';
 import 'package:mnotes/settings/app_settings.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUpStep1 extends StatefulWidget {
+  const SignUpStep1({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUpStep1> createState() => _SignUpStep1State();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpStep1State extends State<SignUpStep1> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  final CustomSnackbar _customSnackbar = CustomSnackbar();
+
+  final Map<String, String> _validatorFields = {
+    "nameField": "nome",
+    "lastnameField": "cognome"
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +29,27 @@ class _LoginState extends State<Login> {
           child: SingleChildScrollView(
             child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //? title
                     Text(
-                      "Bentornato!",
+                      "Benvenuto!",
                       style: Theme.of(context).textTheme.titleLarge,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 31.0,
+                        horizontal: 47.0
+                      ),
+                      child: Text(
+                        "Prima di cominciare MNotes ha bisogno di sapere alcune tue informazioni",
+                        style: TextStyle(
+                          fontSize: Theme.of(context).textTheme.labelLarge!.fontSize,
+                          color: Theme.of(context).textTheme.labelMedium!.color,
+                          fontWeight: Theme.of(context).textTheme.labelMedium!.fontWeight,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                 
                     Padding(
@@ -34,12 +58,44 @@ class _LoginState extends State<Login> {
                         right: 18.0,
                       ),
                       child: Form(
+                        key: _formKey,
                         child: Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: 26.0,
+                                top: 5.0,
                                 bottom: 13.0,
+                              ),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Nome",
+                                    hintStyle: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .hintStyle,
+                                    filled: true,
+                                    fillColor: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .fillColor,
+                                    contentPadding: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .contentPadding,
+                                    border: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .border,
+                                    focusedBorder: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .focusedBorder),
+                                style: Theme.of(context).textTheme.labelLarge,
+                                cursorColor: Theme.of(context)
+                                    .textSelectionTheme
+                                    .cursorColor,
+                              ),
+                            ),
+                                      
+                            //? password field
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 13.0,
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -57,23 +113,20 @@ class _LoginState extends State<Login> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                      hintText: "Email",
-                                      hintStyle: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .hintStyle,
-                                      filled: true,
-                                      fillColor: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .fillColor,
-                                      contentPadding: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .contentPadding,
-                                      border: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .border,
-                                      focusedBorder: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .focusedBorder),
+                                    hintText: "Cognome",
+                                    hintStyle: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .hintStyle,
+                                    filled: true,
+                                    fillColor: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .fillColor,
+                                    contentPadding: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .contentPadding,
+                                    border:
+                                        Theme.of(context).inputDecorationTheme.border,
+                                  ),
                                   style: Theme.of(context).textTheme.labelLarge,
                                   cursorColor: Theme.of(context)
                                       .textSelectionTheme
@@ -82,7 +135,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                                       
-                            //? password field
+                            //? login button
                             Padding(
                               padding: const EdgeInsets.only(
                                 top: 13.0,
@@ -101,88 +154,48 @@ class _LoginState extends State<Login> {
                                     ),
                                   ],
                                 ),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Password",
-                                    hintStyle: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .hintStyle,
-                                    filled: true,
-                                    fillColor: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .fillColor,
-                                    contentPadding: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .contentPadding,
-                                    border:
-                                        Theme.of(context).inputDecorationTheme.border,
-                                  ),
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                  cursorColor: Theme.of(context)
-                                      .textSelectionTheme
-                                      .cursorColor,
-                                  obscureText: true,
-                                ),
-                              ),
-                            ),
-                                      
-                            //? forgot password label
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: null,
-                                child: Text(
-                                  "Hai dimenticato la password?",
-                                  style: Theme.of(context).textTheme.labelMedium,
-                                ),
-                              ),
-                            ),
-                                      
-                            //? login button
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.16),
-                                    spreadRadius: 0.4,
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context).primaryColor,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(16),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Theme.of(context).primaryColor,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(16),
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 22.0,
+                                        horizontal: 28.0
                                       ),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 22.0,
-                                      horizontal: 28.0
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    print("tmp");
-                                  },
-                                  child: Text(
-                                    "Accedi",
-                                    style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge!
-                                          .fontSize,
-                                      fontWeight: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge!
-                                          .fontWeight,
-                                      color: const Color(0xFF019F95),
+                                    onPressed: () {
+                                      
+                                      _customSnackbar.success(context, "Successo", "Operazione andata a buon fine!");
+
+                                      //? validate the form
+                                      // if(_formKey.currentState!.validate()) {
+                                      //   _formKey.currentState!.save();
+
+                                      //   Navigator.of(context).pushNamed(
+                                      //     appRoutes["signup_2"] ?? ""
+                                      //   );
+                                      // }
+
+                                    },
+                                    child: Text(
+                                      "Continua",
+                                      style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .fontSize,
+                                        fontWeight: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .fontWeight,
+                                        color: const Color(0xFF019F95),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -211,7 +224,7 @@ class _LoginState extends State<Login> {
                                         right: 23.0,
                                       ),
                                       child: Text(
-                                        "Continua con",
+                                        "Registrati con",
                                         style: TextStyle(
                                             color: Theme.of(context).primaryColor,
                                             fontSize: Theme.of(context)
@@ -383,7 +396,7 @@ class _LoginState extends State<Login> {
                               child: TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pushNamedAndRemoveUntil(
-                                    appRoutes["signup_1"] ?? "",
+                                    appRoutes["login"] ?? "",
                                     (route) => false
                                   );
                                 },
@@ -391,13 +404,13 @@ class _LoginState extends State<Login> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      "Non hai un account?",
+                                      "Hai già un account?",
                                       style:
                                           Theme.of(context).textTheme.labelMedium,
                                     ),
                                     const Text(" "),
                                     Text(
-                                      "Registrati",
+                                      "Accedi",
                                       style: TextStyle(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: Theme.of(context)

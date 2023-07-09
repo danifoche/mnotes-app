@@ -15,6 +15,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   flutter_svg: ^2.0.5
   simple_shadow: ^0.3.1
+  flash: ^3.0.5+1
 
 dev_dependencies:
   flutter_test:
@@ -31,7 +32,20 @@ flutter:
         - asset: fonts/Oxygen-Light.ttf
         - asset: fonts/Oxygen-Regular.ttf
   assets: 
-    - images/google_icon.svg
-    - images/facebook_icon.svg
-    - images/apple_icon.svg
-    - images/back_icon.svg
+    - assets/icons/google_icon.svg
+    - assets/icons/facebook_icon.svg
+    - assets/icons/apple_icon.svg
+    - assets/icons/back_icon.svg
+    - assets/icons/success_icon.svg
+    - assets/icons/save_icon.svg
+    - assets/icons/home_chat_icon.svg
+    - assets/icons/home_settings_icon.svg
+    - assets/icons/home_contacts_icon.svg
+    - assets/icons/home_ellipse_icon.svg
+    - assets/icons/home_search_icon.svg
+    - assets/icons/home_notes_icon.png
+    - assets/icons/home_mnotes_icon.svg
+    - assets/icons/contacts_details_phone_icon.svg
+    - assets/icons/contacts_details_edit_icon.svg
+    - assets/backgrounds/lets_start.svg
+    - assets/backgrounds/contacts_permission.png

@@ -11,19 +11,22 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   //? initial route
-  final String _initialRoute = '/login';
+  final String _initialRoute = '/home';
 
   //? debug flag
   final bool _showDebugBanner = false;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      theme: appTheme,
-      initialRoute: _initialRoute,
-      onGenerateRoute: onGenerateRoute,
-      debugShowCheckedModeBanner: _showDebugBanner,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp(
+        title: appTitle,
+        theme: appTheme,
+        initialRoute: _initialRoute,
+        onGenerateRoute: onGenerateRoute,
+        debugShowCheckedModeBanner: _showDebugBanner,
+      ),
     );
   }
 }
