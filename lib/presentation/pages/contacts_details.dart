@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:mnotes/presentation/widgets/snackbar/custom_snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ContactsDetails extends StatefulWidget {
@@ -11,6 +12,7 @@ class ContactsDetails extends StatefulWidget {
 
 class _ContactsDetailsState extends State<ContactsDetails> {
 
+  final CustomSnackbar _customSnackbar = CustomSnackbar();
   bool editMode = false;
 
   @override
@@ -56,32 +58,28 @@ class _ContactsDetailsState extends State<ContactsDetails> {
             "Dettaglio contatto",
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          (
-            editMode ? IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () => setState(() {
-                editMode = false;
-              }),
-              icon: SvgPicture.asset(
-                "assets/icons/save_icon.svg",
-                height: 25.0, 
-                width: 25.0,
-                fit: BoxFit.cover
-              ),
-            ) : IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () => setState(() {
-                editMode = true;
-              }),
-              icon: Icon(
-                Icons.create_outlined,
-                size: 27.0,
-                color: Theme.of(context).primaryColor,
-              ),
-            )
-          ),
+          (editMode
+              ? IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: () => setState(() {
+                    editMode = false;
+                  }),
+                  icon: SvgPicture.asset("assets/icons/save_icon.svg",
+                      height: 25.0, width: 25.0, fit: BoxFit.cover),
+                )
+              : IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: () => setState(() {
+                    editMode = true;
+                  }),
+                  icon: Icon(
+                    Icons.create_outlined,
+                    size: 27.0,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                )),
         ],
       ),
     );
@@ -145,8 +143,7 @@ class _ContactsDetailsState extends State<ContactsDetails> {
               ),
             ),
           ),
-
-          if(editMode) 
+          if (editMode)
             Padding(
               padding: const EdgeInsets.only(
                 top: 8.0,
@@ -159,7 +156,7 @@ class _ContactsDetailsState extends State<ContactsDetails> {
                   color: const Color(0xFF019F95),
                 ),
               ),
-            ), 
+            ),
         ],
       ),
     );
@@ -237,8 +234,21 @@ class _ContactsDetailsState extends State<ContactsDetails> {
                         ),
                       ],
                     ),
-                    SvgPicture.asset(
-                        "assets/icons/contacts_details_phone_icon.svg"),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () async {
+                        Uri phoneUrl = Uri.parse("tel:+39 333 352 1812");
+                        if(!await launchUrl(phoneUrl)) {
+                          if (context.mounted) {
+                            _customSnackbar.error(context, "Errore", "Qualcosa è andato storto!");
+                          }
+                        }
+                      },
+                      icon: SvgPicture.asset(
+                        "assets/icons/contacts_details_phone_icon.svg",
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -313,15 +323,13 @@ class _ContactsDetailsState extends State<ContactsDetails> {
                 child: TextFormField(
                   decoration: const InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0, 
-                      vertical: 0
-                    ),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                   autocorrect: false,
                   autofocus: true,
@@ -342,15 +350,13 @@ class _ContactsDetailsState extends State<ContactsDetails> {
                 child: TextFormField(
                   decoration: const InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0, 
-                      vertical: 0
-                    ),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                   autocorrect: false,
                   initialValue: "adam@memora.net",
@@ -370,15 +376,13 @@ class _ContactsDetailsState extends State<ContactsDetails> {
                 child: TextFormField(
                   decoration: const InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0, 
-                      vertical: 0
-                    ),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                   autocorrect: false,
                   initialValue: "+39 333 352 1812",

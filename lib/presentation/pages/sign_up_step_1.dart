@@ -171,7 +171,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
                                     ),
                                     onPressed: () {
                                       
-                                      _customSnackbar.success(context, "Successo", "Operazione andata a buon fine!");
+                                      // _customSnackbar.success(context, "Successo", "Operazione andata a buon fine!");
 
                                       //? validate the form
                                       // if(_formKey.currentState!.validate()) {

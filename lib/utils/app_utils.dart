@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mnotes/presentation/widgets/home/contacts_item.dart';
 
 Future<void> showContactsList(BuildContext context) {
@@ -57,9 +58,8 @@ Future<void> showContactsList(BuildContext context) {
                       filled: true,
                       fillColor:
                           Theme.of(context).inputDecorationTheme.fillColor,
-                      contentPadding: Theme.of(context)
-                          .inputDecorationTheme
-                          .contentPadding,
+                      contentPadding:
+                          Theme.of(context).inputDecorationTheme.contentPadding,
                       border: Theme.of(context).inputDecorationTheme.border,
                     ),
                     style: Theme.of(context).textTheme.labelLarge,
@@ -94,4 +94,98 @@ Future<void> showContactsList(BuildContext context) {
       );
     },
   );
+}
+
+List<Widget>? buildSettingsMenu(
+    BuildContext context, List<Map> settings, bool logoutButton) {
+  if (settings.isEmpty) return null;
+
+  List<Widget> list = [];
+
+  print(settings);
+
+  for (var i = 0; i < settings.length; i++) {
+    list.add(
+      Column(
+        children: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: const Color(0xFF9E9E9E),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 25.0,
+                vertical: 15.0,
+              ),
+            ),
+            onPressed: settings[i]["onPressed"],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: [
+                    SizedBox(
+                      child: settings[i]["icon"],
+                      width: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                      ),
+                      child: Text(
+                        settings[i]["label"] ?? "",
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.labelMedium!.fontSize,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SvgPicture.asset(
+                  "assets/icons/settings_go_icon.svg",
+                ),
+              ],
+            ),
+          ),
+          if(i < (settings.length - 1) || logoutButton)
+            const Divider(
+              height: 1,
+              thickness: 1,
+              color: Color.fromARGB(50, 80, 81, 79),
+            ),
+        ],
+      ),
+    );
+  }
+
+  if (logoutButton) {
+    list.add(
+      TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: const Color(0xFF9E9E9E),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+            vertical: 15.0,
+          ),
+        ),
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Disconnetti",
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.labelMedium!.fontSize,
+                fontWeight: FontWeight.normal,
+                color: const Color.fromARGB(255, 246, 81, 81),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  return list;
 }

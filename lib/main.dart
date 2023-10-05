@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   //? initial route
-  final String _initialRoute = '/home';
+  final String _initialRoute = '/login';
 
   //? debug flag
   final bool _showDebugBanner = false;

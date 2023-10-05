@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mnotes/logic/cubit/authentication_cubit.dart';
 import 'package:mnotes/presentation/pages/contacts_details.dart';
 import 'package:mnotes/presentation/pages/contacts_permission.dart';
 import 'package:mnotes/presentation/pages/home_page.dart';
@@ -6,8 +8,11 @@ import 'package:mnotes/presentation/pages/lets_start.dart';
 import 'package:mnotes/presentation/pages/login.dart';
 import 'package:mnotes/presentation/pages/sign_up_step_1.dart';
 import 'package:mnotes/presentation/pages/sign_up_step_2.dart';
+import 'package:mnotes/presentation/widgets/home/settings_submenu.dart';
 
 Route? onGenerateRoute(RouteSettings routeSettings) {
+
+  print(routeSettings);
 
   //? route arguments
   Map? arguments = routeSettings.arguments as Map?;
@@ -17,7 +22,10 @@ Route? onGenerateRoute(RouteSettings routeSettings) {
     //? login page
     case '/login':
       return MaterialPageRoute(
-        builder: (context) => const Login()
+        builder: (context) => BlocProvider(
+            create: (_) => AuthenticationCubit(),
+            child: const Login()
+        ),
       );
     case '/signup/1':
       return MaterialPageRoute(
@@ -42,6 +50,13 @@ Route? onGenerateRoute(RouteSettings routeSettings) {
     case '/home':
       return MaterialPageRoute(
         builder: (context) => const HomePage()
+      );
+    case '/settings/submenu':
+      return MaterialPageRoute(
+        builder: (context) => SettingsSubMenu(
+          headerTitle: arguments?["headerTitle"] ?? "",
+          settingsList: arguments?["settingsList"] ?? [],
+        ),
       );
     default:
       return null;

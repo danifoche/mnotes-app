@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mnotes/presentation/widgets/home/contacts_list.dart';
 import 'package:mnotes/presentation/widgets/home/custom_bottom_navigation_bar.dart';
 import 'package:mnotes/presentation/widgets/home/notes_list.dart';
-import 'package:mnotes/settings/app_utils.dart';
+import 'package:mnotes/presentation/widgets/home/settings_page.dart';
+import 'package:mnotes/utils/app_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,16 +33,19 @@ class _HomePageState extends State<HomePage> {
             children: const <Widget>[
               NotesList(),
               ContactsList(),
-              Text("data3"),
+              SettingsPage(),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => showContactsList(context),
-          backgroundColor: const Color(0xFF019F95),
-          child: const Icon(
-            Icons.add,
-            size: 35.0,
+        floatingActionButton: Visibility(
+          visible: index != 2,
+          child: FloatingActionButton(
+            onPressed: () => showContactsList(context),
+            backgroundColor: const Color(0xFF019F95),
+            child: const Icon(
+              Icons.add,
+              size: 35.0,
+            ),
           ),
         ),
         bottomNavigationBar: CustomBottomNavigationBar(
