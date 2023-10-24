@@ -21,14 +21,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       // get the backend response
       Map<String, dynamic>? response = await _authenticationRepository.logIn(credentials);
 
-      // check the response
+      // check the response is not empty
       if(response != null && response.isNotEmpty) {
-        emit(AuthenticationError(message: response["message"]));
+
+        // check the reponse result
+        if(response["success"] == false) {
+          emit(AuthenticationError(title: "Errore", message: response["data"]["detail"]));
+        } else {
+          emit(const AuthenticationSuccess(title: "Successo", message: "Login andato a buon fine!"));
+        }
+
       } else {
-        emit(const AuthenticationSuccess(message: "Login effettuato con successo!"));
+        emit(const AuthenticationError(title: "Errore", message: "Qualcosa è andato storto"));
       }
+
     } catch (e) {
-      emit(AuthenticationError(message: e.toString()));
+      emit(const AuthenticationError(title: "Errore", message: "Qualcosa è andato storto!"));
     }
   }
 }

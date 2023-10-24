@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mnotes/logic/bloc/contact_bloc.dart';
 import 'package:mnotes/presentation/widgets/home/notes_item.dart';
 
 class NotesList extends StatefulWidget {
@@ -12,14 +14,21 @@ class NotesList extends StatefulWidget {
 class _NotesListState extends State<NotesList> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          header(context),
-          body(context),
-        ],
-      ),
+    return BlocConsumer<ContactBloc, ContactState>(
+      listener:(context, state) {
+        
+      },
+      builder:(context, state) {
+        return SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              header(context),
+              body(context),
+            ],
+          ),
+        );
+      }, 
     );
   }
 }
@@ -53,6 +62,7 @@ Widget header(BuildContext context) {
 }
 
 Widget body(BuildContext context) {
+
   return Expanded(
     child: Container(
       color: Theme.of(context).primaryColor,

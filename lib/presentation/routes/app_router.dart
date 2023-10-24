@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mnotes/logic/bloc/contact_bloc.dart';
 import 'package:mnotes/logic/cubit/authentication_cubit.dart';
 import 'package:mnotes/presentation/pages/contacts_details.dart';
 import 'package:mnotes/presentation/pages/contacts_permission.dart';
@@ -49,7 +50,14 @@ Route? onGenerateRoute(RouteSettings routeSettings) {
       );
     case '/home':
       return MaterialPageRoute(
-        builder: (context) => const HomePage()
+        builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<ContactBloc>(
+                create: (context) => ContactBloc(),
+              ),
+            ],
+            child: const HomePage()
+        ),
       );
     case '/settings/submenu':
       return MaterialPageRoute(
