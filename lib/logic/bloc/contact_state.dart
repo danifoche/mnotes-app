@@ -8,3 +8,14 @@ sealed class ContactState extends Equatable {
 }
 
 final class ContactInitial extends ContactState {}
+
+final class ContactLoading extends ContactState {}
+
+final class ContactList extends ContactState {
+
+  final List<Contact> list;
+
+  const ContactList({required this.list});
+}
+
+final class ContactListEmpty extends ContactState {}

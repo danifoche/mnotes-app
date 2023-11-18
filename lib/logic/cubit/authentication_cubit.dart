@@ -39,4 +39,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(const AuthenticationError(title: "Errore", message: "Qualcosa è andato storto!"));
     }
   }
+
+  void checkAccessToken() async {
+
+    bool response = await _authenticationRepository.checkAccessToken();
+
+    if(response) {
+      emit(AuthenticationCheckAccessTokenValid());
+    }
+
+    emit(AuthenticationCheckAccessTokenError());
+  }
 }

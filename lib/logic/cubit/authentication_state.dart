@@ -36,3 +36,7 @@ class AuthenticationError extends AuthenticationState {
   @override
   List<Object> get props => [];
 }
+
+class AuthenticationCheckAccessTokenValid extends AuthenticationState {}
+
+class AuthenticationCheckAccessTokenError extends AuthenticationState {}

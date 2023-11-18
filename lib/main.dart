@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mnotes/logic/cubit/authentication_cubit.dart';
 import 'package:mnotes/presentation/routes/app_router.dart';
 import 'package:mnotes/presentation/theme/app_theme.dart';
 import 'package:mnotes/settings/app_settings.dart';
@@ -18,14 +22,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: MaterialApp(
-        title: appTitle,
-        theme: appTheme,
-        initialRoute: _initialRoute,
-        onGenerateRoute: onGenerateRoute,
-        debugShowCheckedModeBanner: _showDebugBanner,
+    return BlocProvider<AuthenticationCubit>(
+      create: (context) => AuthenticationCubit(),
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: MaterialApp(
+          title: appTitle,
+          theme: appTheme,
+          initialRoute: _initialRoute,
+          onGenerateRoute: onGenerateRoute,
+          debugShowCheckedModeBanner: _showDebugBanner,
+        ),
       ),
     );
   }

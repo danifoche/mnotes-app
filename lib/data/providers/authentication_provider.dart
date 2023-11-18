@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mnotes/data/providers/user_provider.dart';
 import 'package:mnotes/settings/app_settings.dart';
 import 'package:mnotes/utils/rest.dart';
 
@@ -7,6 +8,7 @@ class AuthenticationProvider {
 
   final Rest _rest = Rest();
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  final UserProvider _userProvider = UserProvider();
 
   // perform a login request with the given user credentials
   Future<Map<String, dynamic>?> logIn(Map<String, dynamic> credentials) async {
@@ -21,6 +23,21 @@ class AuthenticationProvider {
     }));
 
     return response;
+  }
+
+  //? check if the token is store, the validation will be done when we make an actual api call
+  //? and if the token will not be valid anymore we will get a new one with the refreshtoken
+  Future<bool> checkAccessToken() async {
+
+    // get the user token or empty if it's null
+    String accessToken = ((await _userProvider.details())?.accessToken) ?? "";
+
+    // check if the access token exists
+    if(accessToken.isEmpty) {
+      return false;
+    }
+
+    return true;
   }
 
 }

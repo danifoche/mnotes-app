@@ -8,4 +8,6 @@ class AuthenticationRepository {
   // call the login provider function
   Future<Map<String, dynamic>?> logIn(Map<String, dynamic> credentials) async => await _authenticationProvider.logIn(credentials);
 
+  Future<bool> checkAccessToken() async => await _authenticationProvider.checkAccessToken();
+
 }

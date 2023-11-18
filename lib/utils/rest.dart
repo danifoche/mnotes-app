@@ -35,7 +35,7 @@ class Rest {
   }
 
   // perform a get request
-  Future<dynamic> get(String endpoint, String? token) async {
+  Future<dynamic> get(String data, String endpoint, String? token) async {
 
     //! temporary fix for apy calls
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient dioClient) {

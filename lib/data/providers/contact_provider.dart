@@ -12,7 +12,7 @@ class ContactProvider {
   final UserProvider _userProvider = UserProvider();
 
   // retrieve a list of contacts
-  Future<Map<String, dynamic>?> list(Map<String, dynamic> arguments) async {
+  Future<List<Contact>?> list(Map<String, dynamic> arguments) async {
 
     // get the user token or empty if it's null
     String accessToken = ((await _userProvider.details())?.accessToken) ?? "";
@@ -23,10 +23,15 @@ class ContactProvider {
     }
 
     // TODO: handle refersh token and token errors
+    // TODO: understand why the get request fails
     // get the list
-    Map<String, dynamic> response = await _rest.post(jsonEncode(arguments), apiEndpoints["contacts"]?["list"] ?? "", accessToken);
+    Map<String, dynamic> response = await _rest.get(jsonEncode(arguments), apiEndpoints["contacts"]?["list"] ?? "", accessToken);
 
-    return response;
+    return (response["success"])
+      ? (response["data"]["items"] as List<dynamic>)
+          .map((contact) => Contact.fromJson(contact))
+          .toList()
+      : [];
   }
 
 }

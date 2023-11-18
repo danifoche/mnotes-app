@@ -148,7 +148,7 @@ List<Widget>? buildSettingsMenu(
               ],
             ),
           ),
-          if(i < (settings.length - 1) || logoutButton)
+          if (i < (settings.length - 1) || logoutButton)
             const Divider(
               height: 1,
               thickness: 1,
@@ -188,4 +188,11 @@ List<Widget>? buildSettingsMenu(
   }
 
   return list;
+}
+
+Widget loadingCircle() {
+  return const CircularProgressIndicator(
+    color: Color(0xFF019F95),
+    strokeWidth: 5.0,
+  );
 }
