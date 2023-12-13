@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mnotes/logic/cubit/authentication_cubit.dart';
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   //? initial route
-  final String _initialRoute = '/login';
+  final String _initialRoute = '/home';
 
   //? debug flag
   final bool _showDebugBanner = false;

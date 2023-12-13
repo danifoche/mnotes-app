@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mnotes/presentation/widgets/home/contacts_item.dart';
 
-Future<void> showContactsList(BuildContext context) {
+Future<void> showContactsList(
+    BuildContext context, AnimationController animationController) {
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
+    transitionAnimationController: animationController,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(25.0),
@@ -102,8 +104,6 @@ List<Widget>? buildSettingsMenu(
 
   List<Widget> list = [];
 
-  print(settings);
-
   for (var i = 0; i < settings.length; i++) {
     list.add(
       Column(
@@ -113,7 +113,7 @@ List<Widget>? buildSettingsMenu(
               foregroundColor: const Color(0xFF9E9E9E),
               padding: const EdgeInsets.symmetric(
                 horizontal: 25.0,
-                vertical: 15.0,
+                vertical: 25.0,
               ),
             ),
             onPressed: settings[i]["onPressed"],
@@ -166,7 +166,7 @@ List<Widget>? buildSettingsMenu(
           foregroundColor: const Color(0xFF9E9E9E),
           padding: const EdgeInsets.symmetric(
             horizontal: 25.0,
-            vertical: 15.0,
+            vertical: 25.0,
           ),
         ),
         onPressed: () {},
@@ -194,5 +194,23 @@ Widget loadingCircle() {
   return const CircularProgressIndicator(
     color: Color(0xFF019F95),
     strokeWidth: 5.0,
+  );
+}
+
+Route animateRoute(BuildContext context, Widget widget) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => widget,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.linear;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
   );
 }

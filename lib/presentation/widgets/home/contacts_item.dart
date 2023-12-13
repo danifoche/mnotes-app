@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ContactsItem extends StatefulWidget {
-
   final VoidCallback onClick;
 
-  const ContactsItem({
-    super.key,
-    required this.onClick
-  });
+  const ContactsItem({super.key, required this.onClick});
 
   @override
   State<ContactsItem> createState() => _ContactsItemState();
@@ -22,7 +18,7 @@ class _ContactsItemState extends State<ContactsItem> {
         foregroundColor: const Color(0xFF9E9E9E),
         padding: const EdgeInsets.symmetric(
           horizontal: 24.0,
-          vertical: 10.0,
+          vertical: 20.0,
         ),
       ),
       onPressed: widget.onClick,

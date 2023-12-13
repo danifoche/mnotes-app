@@ -11,12 +11,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           header(context),
           body(context),
@@ -44,7 +42,6 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget body(BuildContext context) {
-
     Object accountManagement = {
       "headerTitle": "Gestione account",
       "settingsList": [
@@ -97,7 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
         "onPressed": () {
           Navigator.of(context).pushNamed(
             appRoutes["settings_submenu"] ?? "",
-            arguments: accountManagement
+            arguments: accountManagement,
           );
         },
         "icon": SvgPicture.asset(
@@ -109,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
         "onPressed": () {
           Navigator.of(context).pushNamed(
             appRoutes["settings_submenu"] ?? "",
-            arguments: permissions
+            arguments: permissions,
           );
         },
         "icon": SvgPicture.asset(
@@ -125,11 +122,16 @@ class _SettingsPageState extends State<SettingsPage> {
           horizontal: 21.0,
         ),
         color: Theme.of(context).primaryColor,
-        child: ListView(
-            children: <Widget>[
-              avatar(),
-              userInfo(context, "Daniele Fochesato", "test@memora.net"),
-              Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            avatar(),
+            userInfo(context, "Daniele Fochesato", "test@memora.net"),
+            Align(
+              child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 500,
+                ),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
@@ -137,13 +139,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   color: Color.fromARGB(25, 80, 81, 79),
                 ),
                 child: Column(
-                  children: buildSettingsMenu(context, settingsList, true) ?? [],
+                  children:
+                      buildSettingsMenu(context, settingsList, true) ?? [],
                 ),
               ),
-              appVersion("1.0.0"),
-            ],
-          ),
+            ),
+            appVersion("1.0.0"),
+          ],
         ),
+      ),
     );
   }
 

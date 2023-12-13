@@ -60,7 +60,7 @@ class _SettingsSubMenuState extends State<SettingsSubMenu> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
 
-          //? trick to move the title in the middle of the header without having an end element
+          // trick to move the title in the middle of the header without having an end element
           Visibility(
             visible: false,
             maintainState: true,
@@ -90,9 +90,12 @@ class _SettingsSubMenuState extends State<SettingsSubMenu> {
           vertical: 35.0,
         ),
         color: Theme.of(context).primaryColor,
-        child: ListView(
+        child: Column(
           children: <Widget>[
             Container(
+              constraints: const BoxConstraints(
+                maxWidth: 500,
+              ),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
@@ -100,7 +103,9 @@ class _SettingsSubMenuState extends State<SettingsSubMenu> {
                 color: Color.fromARGB(25, 80, 81, 79),
               ),
               child: Column(
-                children: buildSettingsMenu(context, widget.settingsList, false) ?? [],
+                children:
+                    buildSettingsMenu(context, widget.settingsList, false) ??
+                        [],
               ),
             ),
           ],

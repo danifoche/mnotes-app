@@ -16,16 +16,13 @@ class _NotesListState extends State<NotesList> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ContactBloc, ContactState>(
-      listener: (context, state) {
-
-      },
+      listener: (context, state) {},
       builder: (context, state) {
-
         // retrieve the list in the initial state
-        if(state is ContactInitial) {
+        if (state is ContactInitial) {
           BlocProvider.of<ContactBloc>(context).add(ContactGetList());
         }
-        
+
         return SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,7 +32,7 @@ class _NotesListState extends State<NotesList> {
             ],
           ),
         );
-      }, 
+      },
     );
   }
 }
@@ -69,47 +66,52 @@ Widget header(BuildContext context, ContactState state) {
 }
 
 Widget body(BuildContext context, ContactState state) {
-
   return Expanded(
     child: Container(
-      color: Theme.of(context).primaryColor,
-      child: (state is ContactLoading) ? (
-        Center(
-          child: loadingCircle(),
-        )
-      ) : (state is ContactList) ? (
-        ListView.builder(
-          itemCount: state.list.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children:  <Widget>[
-                NotesItem(
-                  firstName: state.list[index].firstName ?? "",
-                  lastName: state.list[index].lastName ?? "",
-                  image: state.list[index].image ?? "",
-                  lastNoteAt: "",
-                  lastNoteMessage: "Test message",
-                ),
-                const Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Color.fromARGB(50, 80, 81, 79),
-                ),
-              ],
-            );
-          },
-        )
-      ) : (state is ContactListEmpty) ? (
-        Center(
-          child: Text(
-            "Nessuna nota trovata, creane una!",
-            style: TextStyle(
-              fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
-              fontWeight: Theme.of(context).textTheme.titleMedium!.fontWeight,
-            )
-          ),
-        )
-      ) : Container()
-    ),
+        color: Theme.of(context).primaryColor,
+        child: (state is ContactLoading)
+            ? Center(
+                child: loadingCircle(),
+              )
+            : (state is ContactList)
+                ? ListView.builder(
+                    itemCount: state.list.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: <Widget>[
+                          NotesItem(
+                            firstName: state.list[index].firstName ?? "",
+                            lastName: state.list[index].lastName ?? "",
+                            // image: state.list[index].image ?? "",
+                            image: "",
+                            lastNoteAt: "",
+                            lastNoteMessage: "Test message",
+                          ),
+                          const Divider(
+                            height: 1,
+                            thickness: 1,
+                            color: Color.fromARGB(50, 80, 81, 79),
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                : (state is ContactListEmpty)
+                    ? Center(
+                        child: Text(
+                          "Nessuna nota trovata, creane una!",
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .fontSize,
+                            fontWeight: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .fontWeight,
+                          ),
+                        ),
+                      )
+                    : Container()),
   );
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mnotes/presentation/pages/contacts_details.dart';
 import 'package:mnotes/presentation/widgets/home/contacts_item.dart';
 import 'package:mnotes/settings/app_settings.dart';
 
@@ -65,13 +66,11 @@ Widget body(BuildContext context) {
           return Column(
             children: <Widget>[
               letter(context, "A"),
-              ContactsItem(
-                onClick: () {
-                  Navigator.of(context).pushNamed(
-                    appRoutes["contact_details"] ?? ""
-                  );
-                }
-              ),
+              ContactsItem(onClick: () {
+                Navigator.of(context).pushNamed(
+                  appRoutes["contact_details"] ?? "",
+                );
+              }),
               const Divider(
                 height: 1,
                 thickness: 1,
